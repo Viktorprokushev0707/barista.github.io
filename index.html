@@ -2,28 +2,26 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бариста ловит угощения</title>
     <style>
+        canvas {
+            background: #f0e6d6;
+            display: block;
+            margin: 0 auto;
+        }
         body {
             text-align: center;
             font-family: Arial, sans-serif;
         }
-        canvas {
-            background: #f3e5ab;
-            display: block;
-            margin: 20px auto;
-            border: 1px solid black;
-        }
         #score {
-            font-size: 20px;
+            font-size: 24px;
             margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <h1>Бариста ловит угощения</h1>
-    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <canvas id="gameCanvas" width="480" height="320"></canvas>
     <div id="score">Счёт: 0</div>
     <script src="game.js"></script>
 </body>
