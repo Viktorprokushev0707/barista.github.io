@@ -1,122 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бариста ловит угощения</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            background: #f3e5ab;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid black;
+        }
+        #score {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">const canvas = document.getElementById('gameCanvas');</p>
-<p class="p1">const ctx = canvas.getContext('2d');</p>
-<p class="p2"><br></p>
-<p class="p1">// Добавляем фон</p>
-<p class="p1">const backgroundImg = new Image();</p>
-<p class="p1">backgroundImg.src = 'fon.png';<span class="Apple-converted-space">  </span>// Укажите путь к изображению фона</p>
-<p class="p2"><br></p>
-<p class="p1">const baristaImg = new Image();</p>
-<p class="p1">baristaImg.src = 'barista.png';<span class="Apple-converted-space">  </span>// Изображение баристы</p>
-<p class="p2"><br></p>
-<p class="p1">const itemsImg = {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>'сырник': 'syrnik.png',</p>
-<p class="p1"><span class="Apple-converted-space">    </span>'кофе': 'coffee.png',</p>
-<p class="p1"><span class="Apple-converted-space">    </span>'тост': 'toast.png',</p>
-<p class="p1"><span class="Apple-converted-space">    </span>'купюра': 'money.png'</p>
-<p class="p1">};</p>
-<p class="p2"><br></p>
-<p class="p1">let barista = {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>x: canvas.width / 2 - 25,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>y: canvas.height - 60,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 50,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>height: 60,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>speed: 7</p>
-<p class="p1">};</p>
-<p class="p2"><br></p>
-<p class="p1">let items = [];</p>
-<p class="p1">let score = 0;</p>
-<p class="p2"><br></p>
-<p class="p1">document.addEventListener('keydown', moveBarista);</p>
-<p class="p2"><br></p>
-<p class="p1">function moveBarista(e) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (e.key === 'ArrowLeft' &amp;&amp; barista.x &gt; 0) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>barista.x -= barista.speed;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>} else if (e.key === 'ArrowRight' &amp;&amp; barista.x + barista.width &lt; canvas.width) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>barista.x += barista.speed;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function createItem() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const types = ['сырник', 'кофе', 'тост', 'купюра'];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const type = types[Math.floor(Math.random() * types.length)];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const img = new Image();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>img.src = itemsImg[type];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let item = {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>x: Math.random() * (canvas.width - 30),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>y: -30,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>width: 30,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>height: 30,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>img: img,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>speed: 2 + Math.random() * 2</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p1"><span class="Apple-converted-space">    </span>items.push(item);</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function updateItems() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>for (let i = 0; i &lt; items.length; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const item = items[i];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>item.y += item.speed;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (</p>
-<p class="p1"><span class="Apple-converted-space">            </span>item.x &lt; barista.x + barista.width &amp;&amp;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>item.x + item.width &gt; barista.x &amp;&amp;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>item.y &lt; barista.y + barista.height &amp;&amp;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>item.y + item.height &gt; barista.y</p>
-<p class="p1"><span class="Apple-converted-space">        </span>) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>items.splice(i, 1);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>score += 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('score').innerText = 'Счёт: ' + score;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else if (item.y &gt; canvas.height) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>items.splice(i, 1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function drawBarista() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.drawImage(baristaImg, barista.x, barista.y, barista.width, barista.height);</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function drawItems() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>for (const item of items) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.drawImage(item.img, item.x, item.y, item.width, item.height);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function drawBackground() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height); // Отрисовка фона</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function gameLoop() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.clearRect(0, 0, canvas.width, canvas.height);<span class="Apple-converted-space">  </span>// Очистка канваса перед отрисовкой</p>
-<p class="p1"><span class="Apple-converted-space">    </span>drawBackground();<span class="Apple-converted-space">  </span>// Отрисовываем фон</p>
-<p class="p1"><span class="Apple-converted-space">    </span>drawBarista(); <span class="Apple-converted-space">    </span>// Отрисовываем баристу</p>
-<p class="p1"><span class="Apple-converted-space">    </span>drawItems(); <span class="Apple-converted-space">      </span>// Отрисовываем предметы</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateItems(); <span class="Apple-converted-space">    </span>// Обновляем позиции предметов</p>
-<p class="p1"><span class="Apple-converted-space">    </span>requestAnimationFrame(gameLoop);</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">// Запуск игры после загрузки изображений</p>
-<p class="p1">window.onload = function() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backgroundImg.onload = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>baristaImg.onload = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>setInterval(createItem, 1000);<span class="Apple-converted-space">  </span>// Создание нового предмета каждую секунду</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gameLoop();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p1">};</p>
+    <h1>Бариста ловит угощения</h1>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <div id="score">Счёт: 0</div>
+    <script src="game.js"></script>
 </body>
 </html>
